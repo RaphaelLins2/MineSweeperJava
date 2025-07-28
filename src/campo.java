@@ -1,0 +1,66 @@
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class campo {
+    public static int tamanhoCampoX;
+    public static int tamanhoCampoY;
+    public static int qntBombas;
+    public static List<Coordenada> coordenadasBombas= new ArrayList<>();
+    public static List<Cell> campoLista= new ArrayList<>();
+
+    public static void campoInit(){
+        java.util.Scanner scan = new Scanner(System.in);
+
+        //pegando os valores do campo
+        System.out.println("Qual o tamanho do campo em X? ");
+        tamanhoCampoX = scan.nextInt();
+
+        System.out.println("Qual o tamanho do campo em y? ");
+        tamanhoCampoY = scan.nextInt();
+
+        //pegando a quantidade de bombas
+        System.out.println("Com quantas bombas você quer jogar? ");
+        qntBombas = scan.nextInt();
+    }
+
+    public static void geracaoBombas(){
+        for (int i =0; i < qntBombas; i++){
+            //gerando as coordenadas das bombas
+
+            int xBomba = (int) (Math.random() * tamanhoCampoX-1);
+            int yBomba = (int) (Math.random() * tamanhoCampoY-1);
+
+            Coordenada cord = new Coordenada(xBomba, yBomba);
+
+
+            //checagem de coordenadas repitidas
+            while(coordenadasBombas.contains(cord)){
+                System.out.println("coordenadas duplicadas! Gerando novas");
+                xBomba = (int) (Math.random() * tamanhoCampoX-1);
+                yBomba = (int) (Math.random() * tamanhoCampoY-1);
+                cord = new Coordenada(xBomba, yBomba);
+            }
+            coordenadasBombas.add(cord);
+        }
+        System.out.println(coordenadasBombas);
+        System.out.println("o tamanho da lista deu: " + coordenadasBombas.size());
+    }
+
+    public static void gerarCampo(){
+        for (int ycamp=0; ycamp <tamanhoCampoY; ycamp++){
+            for (int xcamp=0; xcamp <tamanhoCampoX; xcamp++){
+                Cell celula = new Cell(xcamp, ycamp, coordenadasBombas);
+                campoLista.add(celula);
+            }
+        }
+        System.out.println(campoLista);
+        System.out.println("quantidade de celulas num campo: " + campoLista.size());
+    }
+
+    public static void main(String[] args){
+        campoInit();
+        geracaoBombas();
+        gerarCampo();
+    }
+}

@@ -8,7 +8,7 @@ public class Cell {
     public int cordY;
     public int numBombas;
 
-    public void cellInnit(int x, int y, java.util.List<int[]> coordsBombas){
+    Cell(int x, int y, java.util.List<Coordenada> coordsBombas){
         this.bomba = descobrirSeBomba(coordsBombas);
         this.cordX = x;
         this.cordY = y;
@@ -19,10 +19,10 @@ public class Cell {
         return bomba;
     }
 
-    public boolean descobrirSeBomba(java.util.List<int[]> coordsBombas){
-        for (int[] coord : coordsBombas){
+    public boolean descobrirSeBomba(java.util.List<Coordenada> coordsBombas){
+        for (Coordenada coord : coordsBombas){
             //indo em cada coordenada de bomba para encontrar se é bomba ou não
-            if (coord[0] == this.cordX && coord[1] == this.cordY){
+            if (coord.x == this.cordX && coord.y == this.cordY){
                 //caso seja seu valor é mudada para verdadeiro
                 System.out.println("bomba em: X:" + this.cordX + " Y:" + this.cordY);
                 return true;
@@ -62,6 +62,6 @@ public class Cell {
 
     }
 
-    public void main(String[] args){
+    public static void main(String[] args){
     }
 }
