@@ -16,13 +16,16 @@ public class Cell {
     }
 
     public boolean eBomba(){
+        //eu odeio que eu fiz esta função, porém por algum motivo ela funciona melhor
+        //do que se eu pegasse Cell.bomba
         return bomba;
     }
 
     public boolean descobrirSeBomba(java.util.List<Coordenada> coordsBombas){
-        for (Coordenada coord : coordsBombas){
+        System.out.println("descobrindo se eu X:"+ this.cordX + " Y:" + this.cordY+ " sou uma bomba");
+        for (int cords = 0; cords<coordsBombas.size(); cords++){
             //indo em cada coordenada de bomba para encontrar se é bomba ou não
-            if (coord.x == this.cordX && coord.y == this.cordY){
+            if (coordsBombas.get(cords).equals(this.cordX) && coordsBombas.get(cords).y == this.cordY){
                 //caso seja seu valor é mudada para verdadeiro
                 System.out.println("bomba em: X:" + this.cordX + " Y:" + this.cordY);
                 return true;
@@ -60,6 +63,14 @@ public class Cell {
 
         }
 
+    }
+
+    public void revelar(java.util.List<Cell> campoLista, java.util.List<Coordenada> bombasLista, int tamanhoCampoX, int tamanhoCampoY){
+        if (this.revelada || this.bandeira){//chechando se tem bandeira ou se já foi revelada
+            return;
+        }
+        //atualizando a flag de revelada para verdadeiro
+        this.revelada = true;
     }
 
     public static void main(String[] args){

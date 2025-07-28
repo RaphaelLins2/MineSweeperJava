@@ -44,12 +44,17 @@ public class campo {
             coordenadasBombas.add(cord);
         }
         System.out.println(coordenadasBombas);
-        System.out.println("o tamanho da lista deu: " + coordenadasBombas.size());
+        System.out.println("o tamanho da lista de bombas deu: " + coordenadasBombas.size());
     }
 
     public static void gerarCampo(){
+        //gerando um campo para cada célula que tenha no campo,
+        //e sim, em teoria poderia ser utilizado a área do campo
+        //no loop de for, porém como isso é apenas um port e isso
+        //funcionou melhor desse jeito no python, eu decidi deixar assim no java também
         for (int ycamp=0; ycamp <tamanhoCampoY; ycamp++){
             for (int xcamp=0; xcamp <tamanhoCampoX; xcamp++){
+                System.out.println("criando uma celula novas nas coordenadas X/Y" + xcamp  +" "+ ycamp);
                 Cell celula = new Cell(xcamp, ycamp, coordenadasBombas);
                 campoLista.add(celula);
             }
@@ -59,8 +64,21 @@ public class campo {
     }
 
     public static void main(String[] args){
+        java.util.Scanner scan = new Scanner(System.in);
+
         campoInit();
         geracaoBombas();
+        System.out.println("você quer saber todas as coordenadas de bombas? (S/n)");
+        String opcao = scan.nextLine();
+        if (opcao.equals("n")){
+            System.out.println("ok");
+        }else {
+            for (int asd = 0; asd < coordenadasBombas.size(); asd++) {
+                System.out.println("bombas em X:" + coordenadasBombas.get(asd).x + " Y:" + coordenadasBombas.get(asd).y);
+            }
+        }
         gerarCampo();
+
+        System.out.println("Qual coordenada você gostaria de revelar?");
     }
 }
