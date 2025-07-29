@@ -37,30 +37,30 @@ public class Cell {
     public void perguntarSeBomba(int tamanhoCampoX, int tamanhoCampoY, java.util.List<Cell> campo){
         if (this.bomba){
             System.out.println("Eu sou uma bomba:3333! Você perdeu XD ");
-        }
+        }else{
 
-        //perguntar pela existência de bombas em células vizinhas
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = 0; dy <= 1; dy++) {
-                if (dx == 0 && dy == 0){ //não se auto checa pois não é uma bomba
-                    continue;
-                }
-                //após ser reservada uma área de raio 1 ao redor da célula
-                //começa a se fazer realmente a checagem
-                int nx = this.cordX + dx;
-                int ny = this.cordY + dy;
+            //perguntar pela existência de bombas em células vizinhas
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (dx == 0 && dy == 0) { //não se auto checa pois não é uma bomba
+                        continue;
+                    }
+                    //após ser reservada uma área de raio 1 ao redor da célula
+                    //começa a se fazer realmente a checagem
+                    int nx = this.cordX + dx;
+                    int ny = this.cordY + dy;
 
-                //checando os vizinhos na área reservada
-                if (0 <= nx && nx <tamanhoCampoX  && 0 <=ny && ny < tamanhoCampoY){
-                    int id_vizinho = nx + ny * tamanhoCampoX;
-                    if (campo.get(id_vizinho).eBomba()){
-                        System.out.println("Bomba encontrada por perto! :o");
-                        this.numBombas ++;
+                    //checando os vizinhos na área reservada
+                    if (0 <= nx && nx < tamanhoCampoX && 0 <= ny && ny < tamanhoCampoY) {
+                        int id_vizinho = nx + ny * tamanhoCampoX;
+                        if (campo.get(id_vizinho).eBomba()) {
+                            System.out.println("Bomba encontrada por perto! :o");
+                            this.numBombas++;
 
+                        }
                     }
                 }
             }
-
         }
 
     }
@@ -73,7 +73,36 @@ public class Cell {
         this.revelada = true;
 
         perguntarSeBomba(tamanhoCampoX, tamanhoCampoY, campoLista);
+
+        if (this.numBombas == 0 ){
+            revelarAdjacente(campoLista, tamanhoCampoX, tamanhoCampoY, bombasLista);
+        }
     }
+
+    public void revelarAdjacente(java.util.List<Cell> campoLista, int tamanhoCampoX, int tamanhoCampoY, java.util.List<Coordenada> bombasLista){
+        //isso daqui é praticamente a mesma lógica para pegar as
+        //células adjacentes que nem o perguntarSeBomba() faz
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (dx == 0 && dy == 0) { //não se auto checa pois não precisa ser revelado
+                    continue;
+                }
+                //após ser reservada uma área de raio 1 ao redor da célula
+                //começa a se fazer realmente a checagem
+                int nx = this.cordX + dx;
+                int ny = this.cordY + dy;
+
+                //checando os vizinhos na área reservada
+                if (0 <= nx && nx < tamanhoCampoX && 0 <= ny && ny < tamanhoCampoY) {
+                    int id_vizinho = nx + ny * tamanhoCampoX;
+                    if (!campoLista.get(id_vizinho).revelada) {
+                        campoLista.get(id_vizinho).revelar(campoLista, bombasLista, tamanhoCampoX, tamanhoCampoY);
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args){
     }
 }
