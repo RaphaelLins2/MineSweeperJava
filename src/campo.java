@@ -9,7 +9,7 @@ public class campo {
     public static List<Coordenada> coordenadasBombas= new ArrayList<>();
     public static List<Cell> campoLista= new ArrayList<>();
 
-    public static void campoInit(){
+    campo(){
         java.util.Scanner scan = new Scanner(System.in);
 
         //pegando os valores do campo
@@ -22,6 +22,8 @@ public class campo {
         //pegando a quantidade de bombas
         System.out.println("Com quantas bombas você quer jogar? ");
         qntBombas = scan.nextInt();
+        geracaoBombas();
+        gerarCampo();
     }
 
     public static void geracaoBombas(){
@@ -54,30 +56,16 @@ public class campo {
         //funcionou melhor desse jeito no python, eu decidi deixar assim no java também
         for (int ycamp=0; ycamp <tamanhoCampoY; ycamp++){
             for (int xcamp=0; xcamp <tamanhoCampoX; xcamp++){
+                System.out.println("criando uma celula novas nas coordenadas X/Y" + xcamp  +" "+ ycamp);
                 Cell celula = new Cell(xcamp, ycamp, coordenadasBombas);
                 campoLista.add(celula);
             }
         }
         System.out.println(campoLista);
-        System.out.println("quantidade de celulas num campo: " + campoLista.size());
+        System.out.println("quantidade de celulas no campo: " + campoLista.size());
     }
 
     public static void main(String[] args){
-        java.util.Scanner scan = new Scanner(System.in);
 
-        campoInit();
-        geracaoBombas();
-        System.out.println("você quer saber todas as coordenadas de bombas? (S/n)");
-        String opcao = scan.nextLine();
-        if (opcao.equals("n")){
-            System.out.println("ok");
-        }else {
-            for (int asd = 0; asd < coordenadasBombas.size(); asd++) {
-                System.out.println("bombas em X:" + coordenadasBombas.get(asd).x + " Y:" + coordenadasBombas.get(asd).y);
-            }
-        }
-        gerarCampo();
-
-        System.out.println("Qual coordenada você gostaria de revelar?");
     }
 }

@@ -15,6 +15,10 @@ public class Cell {
         this.bomba = descobrirSeBomba(coordsBombas);
     }
 
+    public int numBombasmet(){
+        return this.numBombas;
+    }
+
     public boolean eBomba(){
         //eu odeio que eu fiz esta função, porém por algum motivo ela funciona melhor
         //do que se eu pegasse Cell.bomba
@@ -101,8 +105,5 @@ public class Cell {
                 }
             }
         }
-    }
-
-    public static void main(String[] args){
     }
 }
