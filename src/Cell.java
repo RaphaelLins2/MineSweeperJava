@@ -8,15 +8,12 @@ public class Cell {
     public int cordY;
     public int numBombas;
 
-    Cell(int x, int y, java.util.List<Coordenada> coordsBombas){
+    Cell(int x, int y, java.util.List<Coordenada> coordsBombas, int tamanhoCampoX, int tamanhoCampoY, java.util.List<Cell> campo){
         System.out.println("criando uma celula novas nas coordenadas X/Y: " + x+ "/"+y);
         this.cordX = x;
         this.cordY = y;
         this.bomba = descobrirSeBomba(coordsBombas);
-    }
 
-    public int numBombasmet(){
-        return this.numBombas;
     }
 
     public boolean eBomba(){
@@ -57,7 +54,7 @@ public class Cell {
                     //checando os vizinhos na área reservada
                     if (0 <= nx && nx < tamanhoCampoX && 0 <= ny && ny < tamanhoCampoY) {
                         int id_vizinho = nx + ny * tamanhoCampoX;
-                        if (campo.get(id_vizinho).eBomba()) {
+                        if (campo.get(id_vizinho).bomba) {
                             System.out.println("Bomba encontrada por perto! :o");
                             this.numBombas++;
 
@@ -71,15 +68,17 @@ public class Cell {
 
     public void revelar(java.util.List<Cell> campoLista, java.util.List<Coordenada> bombasLista, int tamanhoCampoX, int tamanhoCampoY){
         if (this.revelada || this.bandeira){//chechando se tem bandeira ou se já foi revelada
-            return;
-        }
-        //atualizando a flag de revelada para verdadeiro
-        this.revelada = true;
+            System.out.println("nao faço nada, sou uma bandeira/revelada :33");
+        }else {
+            //atualizando a flag de revelada para verdadeiro
+            revelada = true;
 
-        perguntarSeBomba(tamanhoCampoX, tamanhoCampoY, campoLista);
+            perguntarSeBomba(tamanhoCampoX, tamanhoCampoY, campoLista);
 
-        if (this.numBombas == 0 ){
-            revelarAdjacente(campoLista, tamanhoCampoX, tamanhoCampoY, bombasLista);
+            if (this.numBombas == 0) {
+                System.out.println("Flood Fill Detectado, fazendo isso nas redondezas de: X" + this.cordX + " Y" + this.cordY);
+                revelarAdjacente(campoLista, tamanhoCampoX, tamanhoCampoY, bombasLista);
+            }
         }
     }
 

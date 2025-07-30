@@ -56,8 +56,8 @@ public class campo {
         //funcionou melhor desse jeito no python, eu decidi deixar assim no java também
         for (int ycamp=0; ycamp <tamanhoCampoY; ycamp++){
             for (int xcamp=0; xcamp <tamanhoCampoX; xcamp++){
-                System.out.println("criando uma celula novas nas coordenadas X/Y" + xcamp  +" "+ ycamp);
-                Cell celula = new Cell(xcamp, ycamp, coordenadasBombas);
+                System.out.println("criando uma celula novas nas coordenadas X/Y " + xcamp  +"/"+ ycamp);
+                Cell celula = new Cell(xcamp, ycamp, coordenadasBombas, tamanhoCampoX, tamanhoCampoY, campoLista);
                 campoLista.add(celula);
             }
         }
