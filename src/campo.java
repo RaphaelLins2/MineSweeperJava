@@ -9,6 +9,7 @@ public class campo {
     public static List<Coordenada> coordenadasBombas= new ArrayList<>();
     public static List<Cell> campoLista= new ArrayList<>();
 
+
     campo(){
         java.util.Scanner scan = new Scanner(System.in);
 
@@ -26,7 +27,7 @@ public class campo {
         gerarCampo();
     }
 
-    public static void geracaoBombas(){
+    public void geracaoBombas(){
         for (int i =0; i < qntBombas; i++){
             //gerando as coordenadas das bombas
 
@@ -49,7 +50,7 @@ public class campo {
         System.out.println("o tamanho da lista de bombas deu: " + coordenadasBombas.size());
     }
 
-    public static void gerarCampo(){
+    public void gerarCampo(){
         //gerando um campo para cada célula que tenha no campo,
         //e sim, em teoria poderia ser utilizado a área do campo
         //no loop de for, porém como isso é apenas um port e isso
@@ -63,6 +64,27 @@ public class campo {
         }
         System.out.println(campoLista);
         System.out.println("quantidade de celulas no campo: " + campoLista.size());
+    }
+
+    public void reiniciar(boolean vitoria, boolean derrota){
+        vitoria = false;
+        derrota = false;
+        coordenadasBombas.clear();
+        campoLista.clear();
+        geracaoBombas();
+        gerarCampo();
+    }
+
+    public boolean checarVitoria(){
+        for (int i = 0; i< campoLista.size(); i++){
+            Cell celula = campoLista.get(i);
+            if (!celula.revelada && !celula.bomba && !celula.bandeira){
+                return false;
+            }
+
+        }
+        System.out.println("ganhou");
+        return true;
     }
 
     public static void main(String[] args){

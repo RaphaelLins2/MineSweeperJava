@@ -66,20 +66,29 @@ public class Cell {
 
     }
 
-    public void revelar(java.util.List<Cell> campoLista, java.util.List<Coordenada> bombasLista, int tamanhoCampoX, int tamanhoCampoY){
+    public boolean revelar(java.util.List<Cell> campoLista, java.util.List<Coordenada> bombasLista, int tamanhoCampoX, int tamanhoCampoY){
         if (this.revelada || this.bandeira){//chechando se tem bandeira ou se já foi revelada
             System.out.println("nao faço nada, sou uma bandeira/revelada :33");
         }else {
             //atualizando a flag de revelada para verdadeiro
             revelada = true;
 
+            //checando se a célula é uma bomba, caso seja o jogo é perdido
+            if (this.bomba){
+                System.out.println("sou uma bomba >:3, perdeste");
+                return true;
+            }
+
             perguntarSeBomba(tamanhoCampoX, tamanhoCampoY, campoLista);
+
+
 
             if (this.numBombas == 0) {
                 System.out.println("Flood Fill Detectado, fazendo isso nas redondezas de: X" + this.cordX + " Y" + this.cordY);
                 revelarAdjacente(campoLista, tamanhoCampoX, tamanhoCampoY, bombasLista);
             }
         }
+        return false;
     }
 
     public void revelarAdjacente(java.util.List<Cell> campoLista, int tamanhoCampoX, int tamanhoCampoY, java.util.List<Coordenada> bombasLista){
