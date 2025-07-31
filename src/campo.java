@@ -78,10 +78,12 @@ public class campo {
     public boolean checarVitoria(){
         for (int i = 0; i< campoLista.size(); i++){
             Cell celula = campoLista.get(i);
-            if (!celula.revelada && !celula.bomba && !celula.bandeira){
+            if (!celula.revelada && !celula.bandeira && !celula.bomba){
                 return false;
             }
-
+            if (celula.bandeira && !celula.bomba){
+                return false;
+            }
         }
         System.out.println("ganhou");
         return true;
