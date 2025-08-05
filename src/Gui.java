@@ -132,6 +132,7 @@ public class Gui {
             int finalI = i;
             //criando cada botão individualmente na grid
             JButton acao = new JButton("");
+            acao.setMargin(new Insets(0,0,0,0));
             acao.setFont(new Font("Arial", Font.BOLD, 30));
 
             //adicionando todos os botões de ação em botões
@@ -225,7 +226,7 @@ public class Gui {
             });
         }
         //colocando as dimensões da grid do campo
-        buttonPanel.setPreferredSize(new Dimension(55*campoTamanhoX, 55*campoTamanhoY));
+        buttonPanel.setPreferredSize(new Dimension(35*campoTamanhoX, 35*campoTamanhoY));
 
 
         //adicionando cada painel em seu respectivo lugar
