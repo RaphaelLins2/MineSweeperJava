@@ -46,12 +46,17 @@ public class Gui {
         }
     }
 
-    public static void updateCells(java.util.List<Cell> campo, int indexCellAtual, JButton botaoAcao){
+    public static void updateCells(java.util.List<Cell> campo, int indexCellAtual, JButton botaoAcao, campo campor){
         //atualiza a célula para que ela respeite o seu estado atual
         if (campo.get(indexCellAtual).revelada){
             //celula revelada mostrando seu número
             String numeroDeBombas = Integer.toString(campo.get(indexCellAtual).numBombas);
-            botaoAcao.setText(numeroDeBombas);
+            if (campor.showNumbers){
+                botaoAcao.setText(numeroDeBombas);
+            }else{
+                botaoAcao.setText("⏺");
+            }
+
             botaoAcao.setBackground(Color.GRAY);
             switch (Integer.parseInt(numeroDeBombas)){
                 case 1:
@@ -86,6 +91,7 @@ public class Gui {
             if (campo.get(indexCellAtual).bomba){
                 //celula revelada com bomba sendo vermelho
                 botaoAcao.setBackground(Color.RED);
+                botaoAcao.setText("δ");
             }
         }
         if (!campo.get(indexCellAtual).revelada && !campo.get(indexCellAtual).bandeira){
@@ -133,7 +139,12 @@ public class Gui {
             //criando cada botão individualmente na grid
             JButton acao = new JButton("");
             acao.setMargin(new Insets(0,0,0,0));
-            acao.setFont(new Font("Arial", Font.BOLD, 30));
+            if (camp.showNumbers){
+                acao.setFont(new Font("Arial", Font.BOLD, 30));
+            }else{
+                acao.setFont(new Font("Arial", Font.BOLD, 50));
+            }
+
 
             //adicionando todos os botões de ação em botões
             botoes.add(acao);
@@ -154,7 +165,7 @@ public class Gui {
                     qntFlags = 0;
                     //atualizando o campo inteiro
                     for (int botoesAtualizar = 0; botoesAtualizar <campo.size(); botoesAtualizar++){
-                        updateCells(campo, botoesAtualizar, botoes.get(botoesAtualizar));
+                        updateCells(campo, botoesAtualizar, botoes.get(botoesAtualizar), camp);
                     }
                     reset.setText(":P");
                 }
@@ -193,7 +204,7 @@ public class Gui {
 
                         //atualizando o campo inteiro, para suportar casos de floodFill
                         for (int botoesAtualizar = 0; botoesAtualizar <campo.size(); botoesAtualizar++){
-                            updateCells(campo, botoesAtualizar, botoes.get(botoesAtualizar));
+                            updateCells(campo, botoesAtualizar, botoes.get(botoesAtualizar), camp);
                         }
                     } else if (SwingUtilities.isRightMouseButton(e) && !ganhou && !derrota){
                         //basicamente um T flip flop pra bandeira

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class campo {
+    public static boolean showNumbers;
     public static int tamanhoCampoX;
     public static int tamanhoCampoY;
     public static int qntBombas;
@@ -12,6 +13,8 @@ public class campo {
 
     campo(){
         java.util.Scanner scan = new Scanner(System.in);
+
+
 
         //pegando os valores do campo
         System.out.println("Qual o tamanho do campo em X? ");
@@ -23,6 +26,14 @@ public class campo {
         //pegando a quantidade de bombas
         System.out.println("Com quantas bombas você quer jogar? ");
         qntBombas = scan.nextInt();
+
+        System.out.println("você gostaria de jogar no modo: 1- difícil, 2-fácil");
+        int opcao = scan.nextInt();
+        if (opcao == 1){
+            showNumbers = false;
+        }else{
+            showNumbers = true;
+        }
         geracaoBombas();
         gerarCampo();
     }
