@@ -5,4 +5,4 @@ de chording, mas isso não impede de jogar.
 
 > **-- Importante--**
 
-Para rodar o .jar você vai precisar no momento do jdk 24, a menos que você vá e compile o código para outra versão
+Para rodar o .jar você vai precisar no momento do [jdk 24](https://www.oracle.com/br/java/technologies/downloads/#jdk24-windows), a menos que você vá e compile o código para outra versão
