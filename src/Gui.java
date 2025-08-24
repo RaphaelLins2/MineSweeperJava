@@ -101,12 +101,12 @@ public class Gui {
         }
     }
 
-    public static void setScreen(int campoTamanhoX, int campoTamanhoY, java.util.List<Cell> campo, java.util.List<Coordenada> listaBomba, campo camp){
+    public static void setScreen(int campoTamanhoX, int campoTamanhoY, java.util.List<Cell> campo, java.util.List<Coordenada> listaBomba, campo camp) {
         timerLabel.setFont(new Font("Arial", Font.BOLD, 30));
         //criando o frame da tela
         JFrame frame = new JFrame("Campo minado menos broxa");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(55*campoTamanhoX, 55*campoTamanhoX);
+        frame.setSize(55*campoTamanhoX, 55*campoTamanhoY);
         //criando os paineis do jogo
         JPanel buttonPanel = new JPanel();
         JPanel containerPanel = new JPanel(new BorderLayout(10, 10));
@@ -133,7 +133,8 @@ public class Gui {
         java.util.List<JButton> botoes = new java.util.ArrayList<>();
 
         //criando a grid
-        buttonPanel.setLayout(new GridLayout(campoTamanhoX,campoTamanhoY));
+
+        buttonPanel.setLayout(new GridLayout(campoTamanhoY,campoTamanhoX));
         for (int i=0; i < (campoTamanhoX*campoTamanhoY); i++) {
             int finalI = i;
             //criando cada botão individualmente na grid

@@ -16,12 +16,6 @@ public class Cell {
 
     }
 
-    public boolean eBomba(){
-        //eu odeio que eu fiz esta função, porém por algum motivo ela funciona melhor
-        //do que se eu pegasse Cell.bomba
-        return bomba;
-    }
-
     public boolean descobrirSeBomba(java.util.List<Coordenada> coordsBombas){
         System.out.println("descobrindo se eu X:"+ this.cordX + " Y:" + this.cordY+ " sou uma bomba");
         for (int cords = 0; cords<coordsBombas.size(); cords++){
