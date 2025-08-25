@@ -9,7 +9,7 @@ public class Cell {
     public int numBombas;
 
     Cell(int x, int y, java.util.List<Coordenada> coordsBombas, int tamanhoCampoX, int tamanhoCampoY, java.util.List<Cell> campo){
-        System.out.println("criando uma celula novas nas coordenadas X/Y: " + x+ "/"+y);
+        //System.out.println("criando uma celula novas nas coordenadas X/Y: " + x+ "/"+y);
         this.cordX = x;
         this.cordY = y;
         this.bomba = descobrirSeBomba(coordsBombas);
@@ -17,12 +17,12 @@ public class Cell {
     }
 
     public boolean descobrirSeBomba(java.util.List<Coordenada> coordsBombas){
-        System.out.println("descobrindo se eu X:"+ this.cordX + " Y:" + this.cordY+ " sou uma bomba");
+        //System.out.println("descobrindo se eu X:"+ this.cordX + " Y:" + this.cordY+ " sou uma bomba");
         for (int cords = 0; cords<coordsBombas.size(); cords++){
             //indo em cada coordenada de bomba para encontrar se é bomba ou não
             if (coordsBombas.get(cords).x ==this.cordX && coordsBombas.get(cords).y == this.cordY){
                 //caso seja seu valor é mudada para verdadeiro
-                System.out.println("Sou uma bomba :3");
+                //System.out.println("Sou uma bomba :3");
                 return true;
             }
         }
@@ -31,7 +31,7 @@ public class Cell {
 
     public void perguntarSeBomba(int tamanhoCampoX, int tamanhoCampoY, java.util.List<Cell> campo){
         if (this.bomba){
-            System.out.println("Eu sou uma bomba:3333! Você perdeu XD ");
+            System.out.println("Player interagiu com uma bomba :3 ");
         }else{
 
             //perguntar pela existência de bombas em células vizinhas
@@ -49,7 +49,7 @@ public class Cell {
                     if (0 <= nx && nx < tamanhoCampoX && 0 <= ny && ny < tamanhoCampoY) {
                         int id_vizinho = nx + ny * tamanhoCampoX;
                         if (campo.get(id_vizinho).bomba) {
-                            System.out.println("Bomba encontrada por perto! :o");
+                            System.out.println("Bomba nas redondezas");
                             this.numBombas++;
 
                         }
@@ -62,14 +62,14 @@ public class Cell {
 
     public boolean revelar(java.util.List<Cell> campoLista, java.util.List<Coordenada> bombasLista, int tamanhoCampoX, int tamanhoCampoY){
         if (this.revelada || this.bandeira){//chechando se tem bandeira ou se já foi revelada
-            System.out.println("nao faço nada, sou uma bandeira/revelada :33");
+            System.out.println("player interagiu com uma célula com bandeira/revelada :3");
         }else {
             //atualizando a flag de revelada para verdadeiro
             revelada = true;
 
             //checando se a célula é uma bomba, caso seja o jogo é perdido
             if (this.bomba){
-                System.out.println("sou uma bomba >:3, perdeste");
+                System.out.println("player perdeu >:3");
                 return true;
             }
 
@@ -78,7 +78,7 @@ public class Cell {
 
 
             if (this.numBombas == 0) {
-                System.out.println("Flood Fill Detectado, fazendo isso nas redondezas de: X" + this.cordX + " Y" + this.cordY);
+                System.out.println("Flood Fill : X" + this.cordX + " Y" + this.cordY);
                 revelarAdjacente(campoLista, tamanhoCampoX, tamanhoCampoY, bombasLista);
             }
         }

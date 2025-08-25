@@ -152,25 +152,7 @@ public class Gui {
             buttonPanel.add(acao);
             acao.setBackground(Color.BLACK);
 
-            //fazendo a lógica do botão de reset
-            reset.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //reiniciando o campo junto com todas as variáveis
-                    camp.reiniciar(ganhou, derrota);
-                    interromperTimer();
-                    timerLabel.setText("000");
-                    timerComecou = false;
-                    ganhou = false;
-                    derrota = false;
-                    qntFlags = 0;
-                    //atualizando o campo inteiro
-                    for (int botoesAtualizar = 0; botoesAtualizar <campo.size(); botoesAtualizar++){
-                        updateCells(campo, botoesAtualizar, botoes.get(botoesAtualizar), camp);
-                    }
-                    reset.setText(":P");
-                }
-            });
+
             acao.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -237,6 +219,26 @@ public class Gui {
                 }
             });
         }
+        //fazendo a lógica do botão de reset
+        reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("\n\nbotão de reset foi acionado\n\n");
+                //reiniciando o campo junto com todas as variáveis
+                camp.reiniciar(ganhou, derrota);
+                interromperTimer();
+                timerLabel.setText("000");
+                timerComecou = false;
+                ganhou = false;
+                derrota = false;
+                qntFlags = 0;
+                //atualizando o campo inteiro
+                for (int botoesAtualizar = 0; botoesAtualizar <campo.size(); botoesAtualizar++){
+                    updateCells(campo, botoesAtualizar, botoes.get(botoesAtualizar), camp);
+                }
+                reset.setText(":P");
+            }
+        });
         //colocando as dimensões da grid do campo
         buttonPanel.setPreferredSize(new Dimension(35*campoTamanhoX, 35*campoTamanhoY));
 

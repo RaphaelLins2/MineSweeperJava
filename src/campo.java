@@ -50,34 +50,36 @@ public class campo {
 
             //checagem de coordenadas repitidas
             while(coordenadasBombas.contains(cord)){
-                System.out.println("coordenadas duplicadas! Gerando novas");
+                //System.out.println("coordenadas duplicadas! Gerando novas");
                 xBomba = (int) (Math.random() * tamanhoCampoX-1);
                 yBomba = (int) (Math.random() * tamanhoCampoY-1);
                 cord = new Coordenada(xBomba, yBomba);
             }
             coordenadasBombas.add(cord);
         }
-        System.out.println(coordenadasBombas);
+
         System.out.println("o tamanho da lista de bombas deu: " + coordenadasBombas.size());
     }
 
     public void gerarCampo(){
+        System.out.println("Gerando campo de tamanho: " + "X:"+ tamanhoCampoX+" Y:"+tamanhoCampoY);
         //gerando um campo para cada célula que tenha no campo,
         //e sim, em teoria poderia ser utilizado a área do campo
         //no loop de for, porém como isso é apenas um port e isso
         //funcionou melhor desse jeito no python, eu decidi deixar assim no java também
         for (int ycamp=0; ycamp <tamanhoCampoY; ycamp++){
             for (int xcamp=0; xcamp <tamanhoCampoX; xcamp++){
-                System.out.println("criando uma celula novas nas coordenadas X/Y " + xcamp  +"/"+ ycamp);
+                //System.out.println("criando uma celula novas nas coordenadas X/Y " + xcamp  +"/"+ ycamp);
                 Cell celula = new Cell(xcamp, ycamp, coordenadasBombas, tamanhoCampoX, tamanhoCampoY, campoLista);
                 campoLista.add(celula);
             }
         }
-        System.out.println(campoLista);
+        //System.out.println(campoLista);
         System.out.println("quantidade de celulas no campo: " + campoLista.size());
     }
 
     public void reiniciar(boolean vitoria, boolean derrota){
+        System.out.println("\nreiniciando o campo!\n");
         vitoria = false;
         derrota = false;
         coordenadasBombas.clear();
