@@ -17,6 +17,12 @@ public class Gui {
     public static boolean derrota = false;
     public static String estadoPartida = ":P";
 
+    public static void hackFunc(java.util.List<Cell> campo, java.util.List<Coordenada> bombasLista, int tamX, int tamY, int indexatual){
+            if (!campo.get(indexatual).bomba) {
+                campo.get(indexatual).revelar(campo, bombasLista, tamX, tamY);
+            }
+    }
+
     public static void iniciarTimer(){
         System.out.println("iniciando o timer!");
         timerInicio= System.currentTimeMillis();
@@ -121,6 +127,13 @@ public class Gui {
         JLabel numeroBombas = new JLabel(Integer.toString(camp.qntBombas));
         numeroBombas.setFont(new Font("Arial", Font.BOLD, 30));
         numeroBombas.setForeground(Color.RED);
+
+        //criando o botão de hack
+        JButton hack = new JButton("insta :3");
+        hack.setBorder(BorderFactory.createEmptyBorder(0, 50,0,50));
+        hack.setBackground(Color.lightGray);
+        hack.setForeground(Color.GRAY);
+        hack.setFont(new Font("Arial", Font.BOLD, 30));
 
         //adicionando um botão para resetar o campo que mostra também o estado da partida
         JButton reset = new JButton(estadoPartida);
@@ -239,6 +252,19 @@ public class Gui {
                 reset.setText(":P");
             }
         });
+
+        //fazendo a lógica do hack
+        hack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int j = 0; j <=campo.size() ; j++) {
+                    hackFunc(campo, listaBomba,campoTamanhoX, campoTamanhoY, j);
+                    updateCells(campo, j, botoes.get(j), camp);
+                }
+                ganhou = true;
+                reset.setText(":3");
+            }
+        });
         //colocando as dimensões da grid do campo
         buttonPanel.setPreferredSize(new Dimension(35*campoTamanhoX, 35*campoTamanhoY));
 
@@ -248,6 +274,7 @@ public class Gui {
         topPanel.add(timerLabel);
         topPanel.add(reset);
         topPanel.add(numeroBombas);
+        topPanel.add(hack);
 
         //adicionando o top panel acima do campo
         containerPanel.add(topPanel, BorderLayout.NORTH);

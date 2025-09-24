@@ -42,8 +42,8 @@ public class campo {
         for (int i =0; i < qntBombas; i++){
             //gerando as coordenadas das bombas
 
-            int xBomba = (int) (Math.random() * tamanhoCampoX-1);
-            int yBomba = (int) (Math.random() * tamanhoCampoY-1);
+            int xBomba = (int) (Math.random() * tamanhoCampoX);
+            int yBomba = (int) (Math.random() * tamanhoCampoY);
 
             Coordenada cord = new Coordenada(xBomba, yBomba);
 
@@ -51,8 +51,8 @@ public class campo {
             //checagem de coordenadas repitidas
             while(coordenadasBombas.contains(cord)){
                 //System.out.println("coordenadas duplicadas! Gerando novas");
-                xBomba = (int) (Math.random() * tamanhoCampoX-1);
-                yBomba = (int) (Math.random() * tamanhoCampoY-1);
+                xBomba = (int) (Math.random() * tamanhoCampoX);
+                yBomba = (int) (Math.random() * tamanhoCampoY);
                 cord = new Coordenada(xBomba, yBomba);
             }
             coordenadasBombas.add(cord);
